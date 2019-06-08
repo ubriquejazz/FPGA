@@ -1,0 +1,10 @@
+\debug
+
+	RomPilotos2k.coe
+
+		-> sin pilotos
+
+
+	RomCeros2k.coe
+
+		-> en la mitad del array

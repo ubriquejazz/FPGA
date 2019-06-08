@@ -1,0 +1,21 @@
+\debug
+
+
+	tabla_2k_pares.coe
+
+		-> addr = 1:1512 ; dout = 1:1512
+
+	tabla_2k_impares.coe
+
+		-> addr = 1:1512 ; dout = 1:1512
+
+
+\release
+
+	tabla_2k_pares.coe
+
+		-> interleaving 1:1512 into 1:1512
+
+	tabla_2k_impares.coe
+
+		-> interleaving 1:1512 into 1:1512

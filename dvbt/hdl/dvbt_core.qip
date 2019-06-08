@@ -1,0 +1,27 @@
+set_global_assignment -name IP_TOOL_NAME "LPM_MUX"
+set_global_assignment -name IP_TOOL_VERSION "12.0"
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "mypackage.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "up_package.vhd"]
+
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "reg_simple.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "contador7x.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "resampler.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "dvbt_core.vhd"]
+
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "coding/coding.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "coding/registro_prbs.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "coding/bit_parallelizer.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "coding/byte_serializer.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "coding/mux_adapter.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "coding/rs_encoder.vho"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "coding/outer_interleaver.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "coding/inner_coder.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "coding/puncturing.vhd"]
+
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "modulator/data_carriers_gen.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "modulator/contador_saturado.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "modulator/contador_escritura.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "modulator/contadores_lectura.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "modulator/bit_int.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "modulator/symbol_int.vhd"]
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "modulator/mapper_64qam.vhd"]

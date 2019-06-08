@@ -1,0 +1,59 @@
+##############################################################
+#
+# Xilinx Core Generator version J.40
+# Date: Thu Sep 23 16:00:21 2010
+#
+##############################################################
+#
+#  This file contains the customisation parameters for a
+#  Xilinx CORE Generator IP GUI. It is strongly recommended
+#  that you do not manually alter this file as it may cause
+#  unexpected and unsupported behavior.
+#
+##############################################################
+#
+# BEGIN Project Options
+SET addpads = False
+SET asysymbol = True
+SET busformat = BusFormatAngleBracketNotRipped
+SET createndf = False
+SET designentry = VHDL
+SET device = xc4vsx35
+SET devicefamily = virtex4
+SET flowvendor = Foundation_iSE
+SET formalverification = False
+SET foundationsym = False
+SET implementationfiletype = Ngc
+SET package = ff668
+SET removerpms = False
+SET simulationfiles = Behavioral
+SET speedgrade = -10
+SET verilogsim = True
+SET vhdlsim = True
+# END Project Options
+# BEGIN Select
+SELECT Reed-Solomon_Encoder family Xilinx,_Inc. 6.1
+# END Select
+# BEGIN Parameters
+CSET ce=true
+CSET check_symbol_generator=Fixed_Architecture
+CSET code_specification=DVB
+CSET component_name=rs_encoder
+CSET data_symbols=188
+CSET field_polynomial=285
+CSET generator_start=0
+CSET memory_style=Automatic
+CSET nd=true
+CSET number_of_channels=1
+CSET rdy=true
+CSET rfd=true
+CSET rffd=false
+CSET scaling_factor=1
+CSET symbol_per_block=204
+CSET symbol_width=8
+CSET variable_block_length=false
+CSET variable_number_of_check_symbols=false
+# END Parameters
+GENERATE
+# CRC: f81d2c52
+

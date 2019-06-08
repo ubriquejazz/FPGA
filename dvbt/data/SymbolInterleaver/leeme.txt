@@ -1,0 +1,26 @@
+I. Symbol Memory
+----------------
+
+addr = 13 bit
+
+	-> Symbol_Memo ->
+	
+			dout = 6 bit
+
+II. Tablas Hq
+-------------
+
+addr = 13 bit
+
+     	-> Tabla_Hq ->
+
+			dout = 13 bit
+
+
+Symbol_Int.mdl
+
+ Se ha implementado el deinterleaver correspondiente a los simbolos impares mediante un 
+ interleaver (facil de implementar en FPGA) transformando la funcion H(q) a H'(q)
+
+ Este modelo comprueba que si se cascadean ambos interleavers la salida coincide con la entrada.
+

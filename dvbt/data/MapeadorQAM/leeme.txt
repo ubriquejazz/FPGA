@@ -1,0 +1,25 @@
+\release
+
+	
+	diag_qam64 = 7+7*j	
+
+		->	qam64_re.coe 		64 x 16bits
+			
+		->	qam64_im.coe		64 x 16bits
+
+	
+	
+	diag_qam16 = 3+3*j	
+		
+		->	qam16_re.coe 		64 x 16bits
+		
+		-> 	qam16_im.coe		64 x 16bits
+		
+
+	
+	diag_qpsk  = 1+1*j	
+
+		->	qpsk_re.coe 		64 x 16bits
+
+		-> 	qpsk_im.coe		64 x 16bits
+
