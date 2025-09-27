@@ -50,4 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# local
 lab01/exercise2/Ne10-standalone-lib-arm32/
+lab01/data

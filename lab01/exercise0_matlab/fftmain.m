@@ -25,7 +25,7 @@ tones= [2e6 5e6 9e6 12e6];
 amplitude= 0.5;
 [t, finput]= genInput (amplitude, tones, Nfft, fs);
 
-fidh= fopen ('DataIn.h', 'w+');
+fidh= fopen ('../data/DataIn.h', 'w+');
 fprintf (fidh, 'sampleOutX_t DataIn[FFT_LENGTH]= {');
 for n=1:length(finput)-1,
     fprintf (fidh, 'std::complex<float>(%f,%f), ', real(finput(n)), imag(finput(n)));
@@ -70,7 +70,7 @@ end;
 f = [-Nfft/2:Nfft/2-1]*fs/Nfft;
 fxoutputi= FlexFFT (Nfft, finput(1:Nfft));
 
-fidh= fopen ('DataOut_OK.h', 'w+');
+fidh= fopen ('../data/DataOut_OK.h', 'w+');
 fprintf (fidh, 'sampleOutX_t DataOut_OK[FFT_LENGTH]= {');
 for n=1:length(fxoutputi)-1,
     fprintf (fidh, 'std::complex<float>(%f,%f), ', real(fxoutputi(n)), imag(fxoutputi(n)));
