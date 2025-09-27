@@ -58,6 +58,10 @@ void FlexBtfly(int N, sampleOutX_t* datain, sampleOutX_t* dataout, const sampleC
 
 int main() {
 
+	printf("*****************************************************\n");
+	printf("***  Launching the FFT test program (%d) ***\n", FFT_LENGTH);
+	printf("******************************************************\n");
+
 	// DataIn from ../data/DataIn.h
 	sampleOutX_t b[FFT_LENGTH];
 	FlexFFT(DataIn, b);
