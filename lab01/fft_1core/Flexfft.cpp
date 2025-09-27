@@ -1,5 +1,7 @@
 #include "Flexfft.h"
-#include "W_coef.h"
+#include "../data/W_coef.h"
+#include "../data/DataIn.h"
+#include "../data/DataOut_OK.h"
 
 void FlexFFT(sampleOutX_t datain[FFT_LENGTH], sampleOutX_t dataout[FFT_LENGTH])
 {
@@ -54,8 +56,32 @@ void FlexBtfly(int N, sampleOutX_t* datain, sampleOutX_t* dataout, const sampleC
 	}
 }
 
-void main() {
-	sampleOutX_t a[FFT_LENGTH];
+int main() {
+
+	// DataIn from ../data/DataIn.h
 	sampleOutX_t b[FFT_LENGTH];
-	FlexFFT(a, b);
+	FlexFFT(DataIn, b);
+
+	// Compare DataOut with DataOut_OK from ../data/DataOut_OK.h	
+	int error=0;
+	for (int i=0; i<FFT_LENGTH; i++) {
+		if ( ( (b[i].real() - DataOut_OK[i].real()) > 0.01) || ( (b[i].real() - DataOut_OK[i].real()) < -0.01) ) {
+			error++;
+		}
+		if ( ( (b[i].imag() - DataOut_OK[i].imag()) > 0.01) || ( (b[i].imag() - DataOut_OK[i].imag()) < -0.01) ) {
+			error++;
+		}
+	}
+	if (error==0) {
+		printf("FFT OK\n");
+	} else {
+		printf("FFT ERROR: %d\n", error);
+	}
+
+	printf("***********************************************\n");
+	printf("***  End of FFT test program  ***\n");
+	printf("***********************************************\n");
+
+
+	return 0;
 }
