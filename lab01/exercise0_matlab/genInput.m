@@ -1,4 +1,4 @@
-function [t, signal]= geninput (type, fTones, nSamples, fs)
+function [t, signal]= genInput (type, fTones, nSamples, fs)
 
 % Check of a correct call
 if nargin~=4,
@@ -13,7 +13,7 @@ else,
 end;
 
 % Generation of partial signals
-t= [0:1/fs:(nSamples-1)*(1/fs)];
+t= [0 : 1/fs : (nSamples-1)*(1/fs)];
 signal= zeros (size (t));
 for i=1: length (fTones),
     signal= signal + amplitude(i)*sin (2*pi*fTones(i)*t);
