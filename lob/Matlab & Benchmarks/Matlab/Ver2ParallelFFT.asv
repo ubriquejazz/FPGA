@@ -1,0 +1,64 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%
+% ParallelFFT.m
+% Parallel Implementation of Float-Point FFTs 
+% DSP based FDOCT (Juan GAGO)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+clear all;
+close all;
+N = 1024;
+M = sqrt(N);
+
+for f0 = 1:(N/2)
+   
+n = 0 : 1/N : 1-1/N;
+x = cos(2*pi*f0*n);
+
+X = fft(x);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+% Step 1&2: Arrange the input array in a M*M matrix
+for row = 1 : M
+    A(row, 1:M) = x([1:M] + (row-1)*M);
+end;
+
+% Step 3 - 1st FFT stage: 32 FFTs of 64 complex points
+for row = 2: 2: 64
+    D(row-1, 1:M)   = zeros(1,M);
+    D(row, 1:M)     = A(row/2, 1:M);
+end ;   
+B = fft(D,64);         
+
+% Step 4: Change the phase of the elements
+for m = 1 : M
+    for k = 1 : M
+        C(m,k) = B(m,k) * exp (- 2 * pi * i * (m-1) * (k-1) / N);
+    end;
+end;
+
+% Step 5&6 - 2nd FFT stage: 32 FFTs of 64 complex points
+for row = 2: 2: 64
+    D(row-1, 1:M)   = zeros(1,M);
+    D(row, 1:M)     = A(row/2, 1:M);
+end ;   
+D = fft (C',64);    
+
+% Arrange the output M*M matrix in an N-array
+for row = 1 : M            
+    Y([1:M] + (row-1)*M) = D(row, M:-1:1);
+end;
+Z = circshift(Y,[0 -M]);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+figure(1);clf;
+title('Parallel FFT');
+xlabel('freq samples');
+ylabel('magnitude');
+line(1:N, abs(X),'color','b','LineStyle','none', 'Marker','+');
+line(1:N, abs(Z),'color','r','LineStyle','none', 'Marker','.');
+drawnow;
+end;

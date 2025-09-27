@@ -1,0 +1,127 @@
+
+ARCHITECTURE(ADSP-21160)
+
+//
+// ADSP-21160 Memory Map:
+//   ------------------------------------------------
+//   Internal memory  0x0000 0000 to 0x000f ffff
+//   ------------------------------------------------
+//                    0x0000 0000 to 0x0000 0?ff  IOP Regs
+//                    0x0000 0?00 to 0x0001 ffff  (reserved)
+//           Block 0  0x0002 0000 to 0x0002 7fff  Long Word (64) Addresses
+//           Block 1  0x0002 8000 to 0x0002 ffff  Long Word (64) Addresses
+//                    0x0003 0000 to 0x0003 ffff  (reserved)
+//           Block 0  0x0004 0000 to 0x0004 ffff  Normal Word (32/48) Addresses
+//           Block 1  0x0005 0000 to 0x0005 ffff  Normal Word (32/48) Addresses
+//                    0x0006 0000 to 0x0007 ffff  (reserved)
+//           Block 0  0x0008 0000 to 0x0009 ffff  Short Word (16) Addresses
+//           Block 1  0x000a 0000 to 0x000b ffff  Short Word (16) Addresses
+//                    0x000c 0000 to 0x000f ffff  (reserved)
+//   ------------------------------------------------
+//   Multiproc memory 0x0010 0000 to 0x007f ffff
+//   ------------------------------------------------
+//                    0x0010 0000 to 0x001f ffff  Hammerhead ID=001 Internal memory
+//                    0x0020 0000 to 0x002f ffff  Hammerhead ID=010 Internal memory
+//                    0x0030 0000 to 0x003f ffff  Hammerhead ID=011 Internal memory
+//                    0x0040 0000 to 0x004f ffff  Hammerhead ID=100 Internal memory
+//                    0x0050 0000 to 0x005f ffff  Hammerhead ID=101 Internal memory
+//                    0x0060 0000 to 0x006f ffff  Hammerhead ID=110 Internal memory
+//                    0x0070 0000 to 0x007f ffff  Hammerhead ID=all Internal memory
+//   ------------------------------------------------
+//   External memory  0x0080 0000 to 0xffff ffff
+//   ------------------------------------------------
+//
+// This architecture file allocates:
+//         Internal 256 words of run-time header in memory block 0
+//                  256 words of initialization code in memory block 0
+//                  38K words of C code space in memory block 0
+//                   6K words of C PM data space in memory block 0
+//                  32K words of C DM data space in memory block 1
+//                   8K words of C heap space in memory block 1
+//                   8K words of C stack space in memory block 1
+
+SEARCH_DIR( $ADI_DSP\211xx\lib )
+
+// The lib160.dlb must come before libchh.dlb because libchh.dlb has some 21020
+// specific code and data
+$LIBRARIES = lib160.dlb, libc160.dlb, libio160_32.dlb, libdsp160.dlb;
+
+
+// Libraries from the command line are included in COMMAND_LINE_OBJECTS.
+$OBJECTS = 160_hdr.doj, $COMMAND_LINE_OBJECTS;
+
+MEMORY
+{
+	seg_rth  { TYPE(PM RAM) START(0x00040000) END(0x000400ff) WIDTH(48) }
+	seg_init { TYPE(PM RAM) START(0x00040100) END(0x000401ff) WIDTH(48) }
+	seg_pmco { TYPE(PM RAM) START(0x00040200) END(0x00047fff) WIDTH(48) }
+// rlh 12/02/99 - Set up a segment for doing 48 bit transfers
+	seg_pm40 { TYPE(PM RAM) START(0x00048000) END(0x00049aa9) WIDTH(40) }
+
+	seg_pmda { TYPE(DM RAM) START(0x0004e800) END(0x0004ffff) WIDTH(32) }
+	seg_dmda { TYPE(DM RAM) START(0x00050000) END(0x00057fff) WIDTH(32) }
+
+	seg_heap { TYPE(DM RAM) START(0x0005c000) END(0x0005dfff) WIDTH(32) }
+	seg_stak { TYPE(DM RAM) START(0x0005e000) END(0x0005ffff) WIDTH(32) }
+}
+
+
+
+PROCESSOR p0
+{
+    LINK_AGAINST( $COMMAND_LINE_LINK_AGAINST)
+    OUTPUT( $COMMAND_LINE_OUTPUT_FILE )
+
+    SECTIONS
+    {
+		// .text output section
+		seg_rth
+		{
+			INPUT_SECTIONS( $OBJECTS(seg_rth) $LIBRARIES(seg_rth))
+		} >seg_rth
+
+		seg_init
+		{
+			ldf_seginit_space = . ;
+			INPUT_SECTIONS( $OBJECTS(seg_init) $LIBRARIES(seg_init))
+		} >seg_init
+
+		seg_pmco
+		{
+			INPUT_SECTIONS( $OBJECTS(seg_pmco) $LIBRARIES(seg_pmco))
+		} >seg_pmco
+
+		seg_pm40
+		{
+			INPUT_SECTIONS( $OBJECTS(seg_pm40) $LIBRARIES(seg_pm40))
+		} >seg_pm40
+
+		seg_pmda
+		{
+			INPUT_SECTIONS( $OBJECTS(seg_pmda) $LIBRARIES(seg_pmda))
+		} >seg_pmda
+
+		seg_dmda
+		{
+			INPUT_SECTIONS( $OBJECTS(seg_dmda) $LIBRARIES(seg_dmda))
+		} > seg_dmda
+
+		stackseg
+		{
+
+			// allocate a stack for the application
+			ldf_stack_space = .;
+			ldf_stack_length = MEMORY_SIZEOF(seg_stak);
+		} > seg_stak
+
+		heap
+		{
+			// allocate a heap for the application
+			ldf_heap_space = .;
+			ldf_heap_end = ldf_heap_space + MEMORY_SIZEOF(seg_heap) - 1;
+			ldf_heap_length = ldf_heap_end - ldf_heap_space;        
+		} > seg_heap
+		
+    }
+}
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="file:///d:/Program Files/Analog Devices/VisualDSP 4.5/System/linker_log.xsl"?>
+<DOCUMENT gen_time='Mon Jun 25 22:44:15 2007
+'>
+<MSG id='0102D7B8' mid='li2153' type='Warning'>
+<TEXT><![CDATA[Input sections have inconsistent qualifiers as follows.
+DOUBLEANY | libc160.dlb[errno.doj](seg_dmda)
+DOUBLEANY | libc160.dlb[errno.doj](seg_pmco)
+DOUBLEANY | libc160.dlb[expf.doj](seg_dmda)
+DOUBLEANY | libc160.dlb[expf.doj](seg_pmco)
+DOUBLEANY | libc160.dlb[float_divide.doj](seg_pmco)
+DOUBLEANY | libc160.dlb[getargv.doj](seg_dmda)
+DOUBLEANY | libc160.dlb[getargv.doj](seg_pmco)
+DOUBLEANY | libc160.dlb[int_sprt.doj](seg_pmco)
+DOUBLEANY | libc160.dlb[int_tabl.doj](seg_dmda)
+DOUBLEANY | libc160.dlb[060_proc.doj](seg_pmco)
+DOUBLE32  | debug\Blink.doj(seg_dmda)
+DOUBLE32  | debug\Blink.doj(seg_pmco)
+DOUBLE32  | debug\Blink.doj(seg_pmda)
+DOUBLEANY | libc160.dlb[argstring.doj](seg_dmda)
+DOUBLEANY | libc160.dlb[argstring.doj](seg_pmco)
+unknown   | debug\benchmark.doj(seg_pmco)
+DOUBLEANY | 160_hdr.doj(seg_rth)
+DOUBLEANY | libc160.dlb[mth_sprt.doj](seg_pmco)
+DOUBLEANY | libc160.dlb[seg_init.doj](seg_init)
+DOUBLEANY | libc160.dlb[seg_init_rtheap.doj](seg_pmco)
+DOUBLEANY | libc160.dlb[set_args.doj](seg_dmda)
+DOUBLEANY | libc160.dlb[set_args.doj](seg_pmco)
+DOUBLEANY | libc160.dlb[set_c.doj](seg_pmco)
+DOUBLEANY | libc160.dlb[set_env.doj](seg_dmda)
+DOUBLEANY | libc160.dlb[set_env.doj](seg_pmco)
+DOUBLEANY | libc160.dlb[sinf.doj](seg_dmda)
+DOUBLEANY | libc160.dlb[sinf.doj](seg_pmco)
+DOUBLEANY | libdsp160.dlb[cexpf.doj](seg_pmco)
+DOUBLEANY | libdsp160.dlb[cfftf_simd.doj](seg_pmco)
+DOUBLEANY | libdsp160.dlb[cmltf.doj](seg_pmco)
+DOUBLEANY | libdsp160.dlb[twidfftf.doj](seg_pmco)]]></TEXT>
+</MSG>
+</DOCUMENT>

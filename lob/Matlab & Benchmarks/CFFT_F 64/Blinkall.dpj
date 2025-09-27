@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding='ISO-8859-1'?>
+<visualdsp-project schema="16" name="Blinkall" file="Blinkall.dpj" version="1">
+	<!-- Project build target -->
+	<target>
+		<processor revision="Automatic">ADSP-21160</processor>
+		<extension>.dxe</extension>
+		<type></type>
+	</target>
+	<!-- Configurations -->
+	<configurations active="debug">
+		<configuration name="debug">
+			<intermediate-dir>.\debug</intermediate-dir>
+			<output-dir>.</output-dir>
+			<changed-property-page-flags>0</changed-property-page-flags>
+			<tools>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>1.0|AdditionalOptions>-21160rev0|1034>Check|Defines>BLINK_FLAG0, BLINK_FLAG1, BLINK_FLAG2, BLINK_FLAG3,|1025>Check]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Splitter">
+					<option><![CDATA[|-Version>1.0|-pm>1|-ram>1|-f>NotByte|-ms3>1|-ea>8|-eb>8|-ec>8|-ed>8|-ee>8|-ef>8|-o>Blinkall.s_#]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>1.0|-b>0|-f>0|-l>21k\ldr\060_prom.dxe|-t>32768|-p>0x0|iL>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+		</configuration>
+		<configuration name="release">
+			<intermediate-dir>.\release</intermediate-dir>
+			<output-dir>.</output-dir>
+			<changed-property-page-flags>0</changed-property-page-flags>
+			<tools>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>1.0|1033>Check]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Splitter">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+		</configuration>
+	</configurations>
+	<!-- Files under root directly -->
+	<files>
+		<file name=".\benchmark.asm">
+			<file-configurations>
+				<file-configuration name="debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\Blink.c">
+			<file-configurations>
+				<file-configuration name="debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\debug</intermediate-dir>
+					<output-dir>.</output-dir>
+				</file-configuration>
+				<file-configuration name="release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\release</intermediate-dir>
+					<output-dir>.</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+	</files>
+</visualdsp-project>

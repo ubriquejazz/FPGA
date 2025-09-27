@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding='ISO-8859-1'?>
+<visualdsp-project schema="16" name="hh3_consumer" file="hh3_consumer.dpj" version="1">
+	<!-- Project build target -->
+	<target>
+		<processor revision="Automatic">ADSP-21160</processor>
+		<extension>.dxe</extension>
+		<type></type>
+	</target>
+	<!-- Configurations -->
+	<configurations active="Debug">
+		<configuration name="Debug">
+			<intermediate-dir>.\Debug</intermediate-dir>
+			<output-dir>.\Debug</output-dir>
+			<changed-property-page-flags>0</changed-property-page-flags>
+			<tools>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>1.0|1033>Check|1025>Check]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Splitter">
+					<option><![CDATA[|-Version>1.0|-pm>1|-ram>1|-f>NotByte|-ms3>1|-ee>16|-ef>32|-o>pci_dma]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>1.0|-b>0|-f>0|-l>211xx\ldr\160_prom.dxe|-t>32768|-p>0x0|iL>0]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+		</configuration>
+		<configuration name="Release">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<changed-property-page-flags>0</changed-property-page-flags>
+			<tools>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>1.0|1033>Check]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Splitter">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+		</configuration>
+	</configurations>
+	<!-- Project folders -->
+	<folders>
+		<folder name="Header Files" ext=".h,.hpp,.hxx">
+			<files>
+				<file name=".\extint0.h">
+				</file>
+				<file name=".\fin.h">
+				</file>
+				<file name=".\fin_i2c.h">
+				</file>
+				<file name=".\linkdma.h">
+				</file>
+				<file name=".\utils.h">
+				</file>
+			</files>
+		</folder>
+		<folder name="Linker Files" ext=".ldf,.dlb">
+			<files>
+				<file name=".\fin_i2c.doj">
+					<file-configurations>
+						<file-configuration name="Debug">
+							<excluded-flag value="no"/>
+						</file-configuration>
+						<file-configuration name="Release">
+							<excluded-flag value="no"/>
+						</file-configuration>
+					</file-configurations>
+				</file>
+				<file name=".\utils.doj">
+					<file-configurations>
+						<file-configuration name="Debug">
+							<excluded-flag value="no"/>
+						</file-configuration>
+						<file-configuration name="Release">
+							<excluded-flag value="no"/>
+						</file-configuration>
+					</file-configurations>
+				</file>
+			</files>
+		</folder>
+		<folder name="Source Files" ext=".c,.cpp,.cxx,.asm,.dsp">
+			<files>
+				<file name=".\extint0.c">
+					<file-configurations>
+						<file-configuration name="Debug">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Debug</intermediate-dir>
+							<output-dir>.\Debug</output-dir>
+						</file-configuration>
+						<file-configuration name="Release">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+					</file-configurations>
+				</file>
+				<file name=".\hh3_consumer.c">
+					<file-configurations>
+						<file-configuration name="Debug">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Debug</intermediate-dir>
+							<output-dir>.\Debug</output-dir>
+						</file-configuration>
+						<file-configuration name="Release">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+					</file-configurations>
+				</file>
+				<file name=".\linkdma.c">
+					<file-configurations>
+						<file-configuration name="Debug">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Debug</intermediate-dir>
+							<output-dir>.\Debug</output-dir>
+						</file-configuration>
+						<file-configuration name="Release">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+					</file-configurations>
+				</file>
+			</files>
+		</folder>
+	</folders>
+</visualdsp-project>
