@@ -77,8 +77,8 @@ int main()
 
 	for (int m = 0; m < TEST_SAMPLES; m++)
 	{
-		// TODO:
-		......................................
+		// for an IFFT, the last parameter should be '1'
+		ne10_fft_c2c_1d_float32(pdst_ddr, psrc_ddr, cfg, 0);
 	}
     
 	XTime_GetTime(&tEnd);
@@ -87,9 +87,24 @@ int main()
 	xil_printf("Time average of execution: %.4f us.\n", time_avg / TEST_SAMPLES);
 
 
-	// printf("***  Validation with the golden pattern  ***\n");
-	// printf("********************************************************\n");
-	// TODO: ....................................
+	xil_printf("***  Validation with the golden pattern  ***\n");	
+	int error=0;
+	for (int i=0; i<FFT_LENGTH; i++) {
+        if ( ( (pdst_ddr[i].real() - DataOut_OK[i].real()) > 0.01) || ( (pdst_ddr[i].real() - DataOut_OK[i].real()) < -0.01) ) {
+            error++;
+        }
+        if ( (pdst_ddr[i].imag() - DataOut_OK[i].imag()) > 0.01) || ( (pdst_ddr[i].imag() - DataOut_OK[i].imag()) < -0.01) ) {
+            error++;
+        }
+    }
+    if (error==0) {
+		xil_printf("FFT OK\n");
+	} else {
+		xil_printf("FFT ERROR: %d\n", error);
+	}
+
+	// Free the allocated configuration structure
+    ne10_fft_destroy_c2c_float32(cfg);
 
 	return 0;
 }
