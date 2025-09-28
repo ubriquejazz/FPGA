@@ -1,5 +1,6 @@
 # Prerequisites
 *.d
+.DS_Store
 
 # Object files
 *.o
@@ -52,5 +53,6 @@ Mkfile.old
 dkms.conf
 
 # local
+lab01/.DS_Store
 lab01/Ne10-standalone-lib-arm32/
 lab01/data
