@@ -1,7 +1,14 @@
+/*
+ * Empty C++ Application
+ */
+#include <stdio.h>
+#include "xparameters.h"
+#include "xil_printf.h"
+#include "xtime_l.h"
 #include "Flexfft.h"
+
 #include "../data/DataIn.h"
 #include "../data/DataOut_OK.h"
-#include <stdio.h>
 
 int main() {
 

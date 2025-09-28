@@ -29,10 +29,9 @@ typedef std::complex<float> sampleOutX_t;
 
 int main()
 {
-	printf("*****************************************************\n");
-	printf("***  Launching the FFT test program (%d) ***\n", NFFT);
-	printf("******************************************************\n");
+	XTime tStart, tEnd;
 
+	xil_printf("*** Launching the FFT test program (%d) ***\n", NFFT);
 
 	// Size of FFT
 	ne10_int32_t fftSize = NFFT;
@@ -42,8 +41,6 @@ int main()
 	ne10_fft_cpx_float32_t *pdst_ddr; // = XPAR_DDR_MEM_BASEADDR + 0x8000;
 	// Configuration variable FFT
 	ne10_fft_cfg_float32_t cfg;
-	// Variables to generate input and read output
-	uint32_t i;
 
 	// Checking if NEON is avilable
 	if (ne10_init() != NE10_OK)
@@ -52,8 +49,8 @@ int main()
 		return 1;
 	}
 
-	// printf("***  Alloc memory to FFT test program  ***\n");
-	// printf("***********************************************\n");
+	xil_printf("*** Alloc memory to FFT test program  ***\n");
+	
 	// Configuration of pointers and coefficients of FFT.
 	cfg = ne10_fft_alloc_c2c_float32_neon(fftSize);
 
@@ -68,36 +65,31 @@ int main()
 		return -1;
 	}
 
-
-	// printf("***  Generating the input to FFT test program  ***\n");
-	// printf("*******************************************************\n");
-	for (i = 0; i < NFFT; i++)
+	xil_printf("*** Generating the input to FFT test program  ***\n");
+	for (int i = 0; i < NFFT; i++)
 	{
 		// TODO:
 		psrc_ddr[i] = (ne10_fft_cpx_float32_t) ...................;
 	}
 
-	// printf("***  Launch %d iters of FFT test program  ***\n", TEST_SAMPLES);
-	// printf("********************************************************\n");
+	xil_printf("***  Launch %d iters of FFT test program  ***\n", TEST_SAMPLES);
+    XTime_GetTime(&tStart);
+
 	for (int m = 0; m < TEST_SAMPLES; m++)
 	{
 		// TODO:
 		......................................
 	}
-
-	// printf("***  Time of execution of FFT test program  ***\n");
-	// printf("********************************************************\n");
-
-	printf("Time average of execution: %.4f us.\n", time_avg / TEST_SAMPLES);
+    
+	XTime_GetTime(&tEnd);
+	
+	double time_avg = (double)(tEnd - tStart) / COUNTS_PER_SECOND;
+	xil_printf("Time average of execution: %.4f us.\n", time_avg / TEST_SAMPLES);
 
 
 	// printf("***  Validation with the golden pattern  ***\n");
 	// printf("********************************************************\n");
 	// TODO: ....................................
-
-	printf("***********************************************\n");
-	printf("***  End of FFT test program  ***\n");
-	printf("***********************************************\n");
 
 	return 0;
 }
