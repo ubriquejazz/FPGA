@@ -1,16 +1,14 @@
 # FPGA
 
-
-
 **LAB. OPTIQUE BIOMEDICAL (2007)**
 
 - DSP based FDOCT, Parallel FFT
 
 **DVBT TRANSMITTER (2010)**
 
-- 
+- TBC
 
-**DISEÑO DE STMAS ELECTRÓNICOS DIGITALES (2025)**
+**UNIVERSIDAD ALCALA HENARES (2025)**
 
 B1: Sistemas electrónicos digitales multiprocesador
 
