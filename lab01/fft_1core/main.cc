@@ -1,5 +1,13 @@
-/*
- * Empty C++ Application
+/* FFT implementation on a single core
+
+lab01/fft_1core/main.cc
+
+Develop the main.cc file with the implementation of a FFT, associated to the 
+vector tests previously generated, and validated with the golden patterns
+
+- Integration and verification of the C model in Vivado for a single core solution
+- Measure the performance of the implementation
+
  */
 #include <stdio.h>
 #include "xparameters.h"
@@ -10,10 +18,32 @@
 #include "../data/DataIn.h"
 #include "../data/DataOut_OK.h"
 
+int cuenta(float sigma) {
+    int errorCount = 0;
+	for (int i=0; i<FFT_LENGTH; i++) {
+		if ( ( (b[i].real() - a[i].real()) > sigma) || ( (b[i].real() - a[i].real()) < -sigma) ) {
+			errorCount++;
+		}
+		if ( ( (b[i].imag() - a[i].imag()) > sigma) || ( (b[i].imag() - a[i].imag()) < -sigma) ) {
+			errorCount++;
+		}
+	}
+    return errorCount;
+}
 int main() {
 
+    xil_printf("Inicio del programa...\n\r");
+
+    XTime tStart, tEnd;
+    int errorCount = 0;
     sampleOutX_t DataOut[FFT_LENGTH];
+
+    XTime_GetTime(&tStart);
 	FlexFFT(DataIn, DataOut);
+    XTime_GetTime(&tEnd);
+
+    double elapsed_sec = (double)(tEnd - tStart) / COUNTS_PER_SECOND;
+    xil_printf("Tiempo empleado: %f segundos\n\r", elapsed_sec);    
 
 	// Compare DataOut with DataOut_OK from ../data/DataOut_OK.h	
 	int error=0;

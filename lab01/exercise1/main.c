@@ -44,19 +44,20 @@ int main()
 
     XTime_GetTime(&tStart);
 
+    // dummy operation
+
+    XTime_GetTime(&tEnd);
+
+    double elapsed_sec = (double)(tEnd - tStart) / COUNTS_PER_SECOND;
+    xil_printf("Tiempo empleado: %f segundos\n\r", elapsed_sec);
+
     for (int i = 0; i < FFT_LENGTH; i++) {
         if (a[i] != b[i]) {
             // xil_printf("Error en %d: DataIn=%d, Esperado=%d\n\r", i, a[i], b[i]);
             errorCount++;
         }
     }
-
-    XTime_GetTime(&tEnd);
-
-    double elapsed_sec = (double)(tEnd - tStart) / COUNTS_PER_SECOND;
-    xil_printf("Tiempo de comparación: %f segundos\n\r", elapsed_sec);
-    xil_printf("Errores: %d\n\r", errorCount);
-
+    xil_printf("Errores exactos: %d\n\r", errorCount);
     float sigma = 0.01;
     errorCount = 0;
 	for (int i=0; i<FFT_LENGTH; i++) {

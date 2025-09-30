@@ -1,5 +1,3 @@
-
-
 #include "mutex_blk.h"
 
 #define SHAREABLE (1 << 16)
@@ -24,14 +22,15 @@
 #define SECTION(attributes) ((attributes) | 0x2)
 #define SUPER_SECTION(attributes) ((attributes) | 0x4002)
 
-// Las optimizaciones del compilador pueden hacer que optimice la localización de estas variables dentro del mapa de memoria. Para que en ambos procesadores estén en la misma región, se estable la mínima optimización (o0) en esta parte del programa en ambos cores.
+// Las optimizaciones del compilador pueden hacer que optimice la localizaciï¿½n de estas variables dentro del mapa de memoria. 
+// Para que en ambos procesadores estï¿½n en la misma regiï¿½n, se estable la mï¿½nima optimizaciï¿½n (o0) en esta parte del programa en ambos cores.
 #pragma GCC push_options
 #pragma GCC optimize ("O0")
 
-// Mutex en cada core que se aloja en la sección .mem_mutex del linker script con alineamiento d 32 bits.
+// Mutex en cada core que se aloja en la secciï¿½n .mem_mutex del linker script con alineamiento d 32 bits.
 volatile unsigned int ctrl_mutex __attribute__ ((section (".mem_mutex"))) __attribute__( ( aligned ( 32 ) ) ) = unlocked;
 
-#define DATA_LEN 100
+#define DATA_LEN 512
 volatile unsigned int data[DATA_LEN] __attribute__ ((section (".mem_mutex"))) __attribute__( ( aligned ( 32 ) ) );
 volatile unsigned int result[DATA_LEN] __attribute__ ((section (".mem_mutex"))) __attribute__( ( aligned ( 32 ) ) );
 

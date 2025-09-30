@@ -86,7 +86,6 @@ int main()
 	double time_avg = (double)(tEnd - tStart) / COUNTS_PER_SECOND;
 	xil_printf("Time average of execution: %.4f us.\n", time_avg / TEST_SAMPLES);
 
-
 	xil_printf("***  Validation with the golden pattern  ***\n");	
 	int error=0;
 	for (int i=0; i<FFT_LENGTH; i++) {
