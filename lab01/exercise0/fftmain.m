@@ -28,7 +28,7 @@ amplitude= 0.5;
 fidh= fopen ('../data/DataIn.h', 'w+');
 fprintf (fidh, 'sampleOutX_t DataIn[FFT_LENGTH]= {');
 for n=1:length(finput)-1,
-    fprintf (fidh, 'std::complex<float>(%f,%f), ', real(finput(n)), imag(finput(n)));
+    fprintf (fidh, 'std::complex<float>(%f,%f),\n', real(finput(n)), imag(finput(n)));
 end;
 fprintf (fidh, 'std::complex<float>(%f,%f)};\n\n', real(finput(end)), imag(finput(end)));
 fclose (fidh);
@@ -73,7 +73,7 @@ fxoutputi= FlexFFT (Nfft, finput(1:Nfft));
 fidh= fopen ('../data/DataOut_OK.h', 'w+');
 fprintf (fidh, 'sampleOutX_t DataOut_OK[FFT_LENGTH]= {');
 for n=1:length(fxoutputi)-1,
-    fprintf (fidh, 'std::complex<float>(%f,%f), ', real(fxoutputi(n)), imag(fxoutputi(n)));
+    fprintf (fidh, 'std::complex<float>(%f,%f), \n', real(fxoutputi(n)), imag(fxoutputi(n)));
 end;
 fprintf (fidh, 'std::complex<float>(%f,%f)};\n\n', real(fxoutputi(end)), imag(fxoutputi(end)));
 fclose (fidh);

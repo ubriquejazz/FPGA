@@ -8,9 +8,9 @@ end;
 
 
 fidh= fopen ('W_coef.h', 'w+');
-fprintf (fidh, 'const sampleCoefX_t W[FFT_LENGTH]= {');
+fprintf (fidh, 'const sampleCoefX_t W[FFT_LENGTH/2]= {');
 for n=1:length(W)-1,
-    fprintf (fidh, 'std::complex<float>(%f,%f), ', real(W(n)), imag(W(n)));
+    fprintf (fidh, 'std::complex<float>(%f,%f), \n', real(W(n)), imag(W(n)));
 end;
 fprintf (fidh, 'std::complex<float>(%f,%f)};\n\n', real(W(end)), imag(W(end)));
 fclose (fidh);
@@ -20,7 +20,7 @@ dataout= datain;
 
 for m=1:Nstage
     if m==Nstage
-        W= ones(size(W));
+        W = ones(size(W));
     end;
     %waux=W(1:(2^(m-1)):N/2);
     for n=1:(2^(m-1))
