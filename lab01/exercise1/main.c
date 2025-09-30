@@ -34,7 +34,6 @@ int measure()
     return 0;
 }
 
-
 int main()
 {
     xil_printf("Inicio del programa...\n\r");
@@ -58,16 +57,9 @@ int main()
         }
     }
     xil_printf("Errores exactos: %d\n\r", errorCount);
+    
     float sigma = 0.01;
-    errorCount = 0;
-	for (int i=0; i<FFT_LENGTH; i++) {
-		if ( ( (b[i].real() - a[i].real()) > sigma) || ( (b[i].real() - a[i].real()) < -sigma) ) {
-			errorCount++;
-		}
-		if ( ( (b[i].imag() - a[i].imag()) > sigma) || ( (b[i].imag() - a[i].imag()) < -sigma) ) {
-			errorCount++;
-		}
-	}
+    errorCount = cuenta(a, b, sigma);
     xil_printf("Con tolerancia del %f: %d\n\r", sigma, errorCount);
 
     return 0;
