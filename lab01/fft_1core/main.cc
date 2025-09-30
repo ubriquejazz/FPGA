@@ -18,18 +18,6 @@ vector tests previously generated, and validated with the golden patterns
 #include "../data/DataIn.h"
 #include "../data/DataOut_OK.h"
 
-int cuenta(float sigma) {
-    int errorCount = 0;
-	for (int i=0; i<FFT_LENGTH; i++) {
-		if ( ( (b[i].real() - a[i].real()) > sigma) || ( (b[i].real() - a[i].real()) < -sigma) ) {
-			errorCount++;
-		}
-		if ( ( (b[i].imag() - a[i].imag()) > sigma) || ( (b[i].imag() - a[i].imag()) < -sigma) ) {
-			errorCount++;
-		}
-	}
-    return errorCount;
-}
 int main() {
 
     xil_printf("Inicio del programa...\n\r");
