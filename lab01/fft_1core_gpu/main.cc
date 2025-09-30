@@ -1,5 +1,16 @@
-/*
- * Empty C++ Application
+/* Accelerating the 512-points FFT by using the Neon GPU
+
+List of functions from the Ne10 library to be used:
+- ne10_init()
+- ne10_fft_alloc_c2c_float32_neon()
+
+Initialization of pointers src and dst
+- psrc_ddr = (ne10_fft_cpx_float32_t *) (cfg->buffer + (sizeof(ne10_fft_cpx_float32_t) * (fftSize)))
+- pdst_ddr = (ne10_fft_cpx_float32_t *) (psrc_ddr + (sizeof(ne10_fft_cpx_float32_t) * (fftSize)));
+
+Initialization of the src buffer
+- psrc_ddr[i] = (ne10_fft_cpx_float32_t) (complex_data);
+
  */
 #include <stdio.h>
 #include "xparameters.h"
@@ -18,10 +29,6 @@ typedef std::complex<float> sampleOutX_t;
 
 // NEON libraries
 #include "../Ne10-standalone-lib-arm32/inc/NE10.h"
-#include "../Ne10-standalone-lib-arm32/inc/NE10_fft.h"
-#include "../Ne10-standalone-lib-arm32/inc/NE10_types.h"
-#include "../Ne10-standalone-lib-arm32/inc/NE10_macros.h"
-#include "../Ne10-standalone-lib-arm32/inc/NE10_utils.h"
 
 // Number of FFT points and iterations
 #define NFFT 			FFT_LENGTH
@@ -44,12 +51,7 @@ int main()
 
 	// Checking if NEON is avilable
 	if (ne10_init() != NE10_OK)
-	{
-		xil_printf("\nFailed to initialise Ne10.\n");
 		return 1;
-	}
-
-	xil_printf("*** Alloc memory to FFT test program  ***\n");
 	
 	// Configuration of pointers and coefficients of FFT.
 	cfg = ne10_fft_alloc_c2c_float32_neon(fftSize);
@@ -60,29 +62,21 @@ int main()
 
 	// Check if we can remove this part
 	if (cfg == NULL)
-	{
-		xil_printf("\nERROR! Alloc failed.\n");
 		return -1;
-	}
 
-	xil_printf("*** Generating the input to FFT test program  ***\n");
+	// Generating the input to FFT test program  
 	for (int i = 0; i < NFFT; i++)
-	{
-		// TODO:
-		psrc_ddr[i] = (ne10_fft_cpx_float32_t) ...................;
-	}
+		psrc_ddr[i] = (ne10_fft_cpx_float32_t)(DataIn[i]);
 
 	xil_printf("***  Launch %d iters of FFT test program  ***\n", TEST_SAMPLES);
     XTime_GetTime(&tStart);
 
-	for (int m = 0; m < TEST_SAMPLES; m++)
-	{
+	for (int m = 0; m < TEST_SAMPLES; m++) {
 		// for an IFFT, the last parameter should be '1'
 		ne10_fft_c2c_1d_float32(pdst_ddr, psrc_ddr, cfg, 0);
 	}
     
 	XTime_GetTime(&tEnd);
-	
 	double time_avg = (double)(tEnd - tStart) / COUNTS_PER_SECOND;
 	xil_printf("Time average of execution: %.4f us.\n", time_avg / TEST_SAMPLES);
 
